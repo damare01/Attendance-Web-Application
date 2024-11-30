@@ -45,7 +45,6 @@ An event attendance management system designed to manage and track attendance fo
 
 ### 3. **Form Submission and Data Recording**
    - Upon form submission, the system records the user's attendance details in a **Google Sheet** under the appropriate program and year combination.
-   - The system ensures that the user’s data is accurately added, including the program and year. The "Proof Link" for attendance remains marked as "Pending" until further updates (such as proof submission) are integrated.
 
 ### 4. **Automated Email Confirmation**
    - Upon successful form submission, the user receives an automated confirmation email. The email includes:
