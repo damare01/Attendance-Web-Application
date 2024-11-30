@@ -13,6 +13,7 @@ An event attendance management system designed to manage and track attendance fo
     - [Automated Email Confirmation](#automated-email-confirmation)
     - [Conditional Form Responses Based on `Attendance Open` Setting](#conditional-form-responses-based-on-attendance-open-setting)
     - [Program-Specific Attendance Sheets](#program-specific-attendance-sheets)
+    - [Program Sheet with Full Program Name and Abbreviation](#program-sheet-with-full-program-name-and-abbreviation)
 2. [Technologies Used](#technologies-used)
 3. [Key Configurations](#key-configurations)
     - [Attendance Open Setting](#attendance-open-setting)
@@ -159,3 +160,8 @@ Future development will include additional features like:
 - Better handling of event-specific data.
 - Enhanced user interfaces for managing event details.
 
+---
+
+### License 📄
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
