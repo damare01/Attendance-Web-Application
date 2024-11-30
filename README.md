@@ -159,8 +159,3 @@ Future development will include additional features like:
 - Better handling of event-specific data.
 - Enhanced user interfaces for managing event details.
 
----
-
-### License 📄
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
