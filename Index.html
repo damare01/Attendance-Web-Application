@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+      padding: 40px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .header img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #d9534f;
+      font-size: clamp(1.5rem, 4vw, 2rem); /* Scales with screen size */
+      font-weight: 700;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #555;
+      font-size: clamp(1rem, 2.5vw, 1.2rem); /* Scales font size */
+    }
+
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+      font-size: 1rem;
+      background-color: #f5f5f5;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      border-color: #d9534f;
+      box-shadow: 0 0 8px rgba(217, 83, 79, 0.3);
+      outline: none;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background-color: #d9534f;
+      color: #ffffff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .form-group button:hover {
+      background-color: #c12e2a;
+      transform: scale(1.02);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      max-width: 90%;
+      width: 400px;
+    }
+
+    .modal-content h2 {
+      color: #d9534f;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .close {
+      color: #aaa;
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: clamp(1.5rem, 5vw, 1.8rem);
+      }
+
+      .form-group label {
+        font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+      }
+
+      .form-group button {
+        padding: 12px;
+      }
+
+      .modal-content {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+
+      .form-group input,
+      .form-group select {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://1drv.ms/i/s!Al0JXBvnsaVhgXgfFRPR6hAeF-3d?embed=1&width=1280&height=474" alt="SPCCRCY Header Image">
+    </div>
+    <h1>Event Attendance</h1>
+     <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="program">Program</label>
+      <select id="program" required>
+        <option value="">Select your program</option>
+        <!-- Program options will be populated dynamically -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="year">Year</label>
+      <select id="year" required>
+        <option value="">Select your year</option>
+        <option value="1">1st Year</option>
+        <option value="2">2nd Year</option>
+        <option value="3">3rd Year</option>
+        <option value="4">4th Year</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button id="submitBtn">Submit Attendance</button>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Success!</h2>
+      <p>Your attendance has been recorded successfully.</p>
+    </div>
+  </div>
+
+  <!-- Attendance Closed Modal -->
+  <div id="attendanceClosedModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Attendance Closed</h2>
+      <p>Attendance for this event is currently closed. Please check back later.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('submitBtn').addEventListener('click', function () {
+      const email = document.getElementById('email').value;
+      const name = document.getElementById('name').value;
+      const program = document.getElementById('program').value;
+      const year = document.getElementById('year').value;
+
+      google.script.run.withSuccessHandler(function (response) {
+        if (response === 'closed') {
+          document.getElementById('attendanceClosedModal').style.display = 'flex';
+        } else if (response === 'exists') {
+          alert('You have already recorded your attendance.');
+        } else if (response === 'recorded') {
+          document.getElementById('successModal').style.display = 'flex';
+        }
+      }).checkDuplicateAndRecordAttendance(email, program, year, name);
+    });
+
+    function closeModal() {
+      document.getElementById('successModal').style.display = 'none';
+      document.getElementById('attendanceClosedModal').style.display = 'none';
+    }
+
+    // Load programs and check attendance status when the page loads
+    window.onload = function () {
+      google.script.run.withSuccessHandler(function (programs) {
+        const programSelect = document.getElementById('program');
+        programs.forEach(function (program) {
+          const option = document.createElement('option');
+          option.value = program;
+          option.textContent = program;
+          programSelect.appendChild(option);
+        });
+      }).getPrograms();
+
+      // Check attendance status on load
+      google.script.run.withSuccessHandler(function (status) {
+        if (status === 'No') {
+          document.getElementById('attendanceClosedModal').style.display = 'flex';
+        }
+      }).getAttendanceStatus();
+    };
+  </script>
+</body>
+</html>
