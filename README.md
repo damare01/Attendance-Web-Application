@@ -66,6 +66,12 @@ An event attendance management system designed to manage and track attendance fo
      - Program
      - Year Level
 
+### 7. **Program Sheet with Full Program Name and Abbreviation**
+   - The **Program Sheet** contains two columns:
+     - **Program**: Full program name (e.g., Bachelor of Science in Nursing).
+     - **Abbreviation**: Shortened version of the program name (e.g., BSN).
+   - This sheet is used to dynamically populate the list of available programs in the attendance registration form.
+
 ---
 
 ## Technologies Used 🛠️
@@ -91,6 +97,16 @@ An event attendance management system designed to manage and track attendance fo
 | `Attendance Open` | Yes/No or yes/no |
 
 - If the `Attendance Open` value is set to `no`, users will see a notification that registration is closed, and the form will not be submitted.
+
+### Example of Program Sheet:
+
+| Program                         | Abbreviation |
+|----------------------------------|--------------|
+| Bachelor of Science in Nursing   | BSN          |
+| Bachelor of Arts in Psychology   | BAP          |
+| Master of Business Administration| MBA          |
+
+- The **Program Sheet** is used to populate the list of programs available in the form dynamically.
 
 ---
 
@@ -142,3 +158,9 @@ Future development will include additional features like:
 - File upload for attendance proof.
 - Better handling of event-specific data.
 - Enhanced user interfaces for managing event details.
+
+---
+
+### License 📄
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
