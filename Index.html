@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <base target="_top">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/15.1.0/lazyload.min.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js" async></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js" defer></script>
+
+  <!-- Google Fonts for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     /* Global Styles */
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
       margin: 0;
       padding: 0;
@@ -18,19 +26,24 @@
 
     .container {
       background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       width: 90%;
       max-width: 500px;
       padding: 40px;
       box-sizing: border-box;
       text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .container:hover {
+      transform: scale(1.02);
     }
 
     .header img {
       width: 100%;
       height: auto;
-      border-radius: 10px;
+      border-radius: 16px;
       margin-bottom: 20px;
     }
 
@@ -39,6 +52,7 @@
       color: #d9534f;
       font-size: clamp(1.5rem, 4vw, 2rem); /* Scales with screen size */
       font-weight: 700;
+      text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .form-group {
@@ -50,19 +64,20 @@
       margin-bottom: 12px;
       font-weight: 600;
       color: #555;
-      font-size: clamp(1rem, 2.5vw, 1.2rem); /* Scales font size */
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      text-align: left;
     }
 
     .form-group select,
     .form-group input {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       border-radius: 10px;
       border: 1px solid #ddd;
-      box-sizing: border-box;
+      background-color: #f9f9f9;
       font-size: 1rem;
-      background-color: #f5f5f5;
       transition: border-color 0.3s, box-shadow 0.3s;
+      box-sizing: border-box;
     }
 
     .form-group select:focus,
@@ -74,21 +89,28 @@
 
     .form-group button {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       background-color: #d9534f;
       color: #ffffff;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
+      transition: background-color 0.3s, transform 0.2s ease-in-out;
     }
 
     .form-group button:hover {
       background-color: #c12e2a;
+      transform: scale(1.05);
+    }
+
+    .form-group button:active {
+      background-color: #a52e26;
       transform: scale(1.02);
     }
 
+    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
@@ -97,38 +119,95 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.6);
       align-items: center;
       justify-content: center;
+      transition: opacity 0.3s ease-in-out;
     }
 
     .modal-content {
       background-color: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
+      padding: 40px;
+      border-radius: 16px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
       max-width: 90%;
       width: 400px;
+      position: relative;
+      animation: fadeIn 0.5s ease-out;
     }
 
     .modal-content h2 {
       color: #d9534f;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      font-weight: 700;
     }
 
     .modal-content p {
       color: #555;
       font-size: 1rem;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
+    .modal-content button {
+      padding: 12px 30px;
+      background-color: #d9534f;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .modal-content button:hover {
+      background-color: #c12e2a;
+    }
+
+    /* Loading Indicator Styles */
+    .loading {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .loading .spinner {
+      border: 8px solid #f3f3f3; /* Light grey */
+      border-top: 8px solid #d9534f; /* Red */
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      animation: spin 1.2s linear infinite;
+      box-shadow: 0 0 20px rgba(217, 83, 79, 0.3);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Close Button Styles */
     .close {
       color: #aaa;
       position: absolute;
       right: 16px;
-      top: 8px;
+      top: 16px;
       font-size: 28px;
       font-weight: bold;
       cursor: pointer;
@@ -148,11 +227,12 @@
       }
 
       .form-group button {
-        padding: 12px;
+        padding: 14px;
       }
 
       .modal-content {
-        width: 100%;
+        width: 90%;
+        padding: 20px;
       }
     }
 
@@ -171,28 +251,26 @@
 <body>
   <div class="container">
     <div class="header">
-      <img src="https://1drv.ms/i/s!Al0JXBvnsaVhgXgfFRPR6hAeF-3d?embed=1&width=1280&height=474" alt="SPCCRCY Header Image">
+      <img src="https://1drv.ms/i/s!Al0JXBvnsaVhgXgfFRPR6hAeF-3d?embed=1&width=1280&height=474" alt="SPCCRCY Header Image" loading="lazy">
     </div>
     <h1>Event Attendance</h1>
-     <div class="form-group">
+    <div class="form-group">
       <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="Enter your full name" required>
+      <input type="text" id="name" name="name" placeholder="Enter your name">
     </div>
     <div class="form-group">
       <label for="email">Email Address</label>
-      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="email" id="email" name="email" placeholder="Enter your email">
     </div>
-  
     <div class="form-group">
       <label for="program">Program</label>
-      <select id="program" required>
+      <select id="program" name="program">
         <option value="">Select your program</option>
-        <!-- Program options will be populated dynamically -->
       </select>
     </div>
     <div class="form-group">
       <label for="year">Year</label>
-      <select id="year" required>
+      <select id="year" name="year">
         <option value="">Select your year</option>
         <option value="1">1st Year</option>
         <option value="2">2nd Year</option>
@@ -205,66 +283,117 @@
     </div>
   </div>
 
+  <!-- Loading Spinner -->
+  <div class="loading">
+    <div class="spinner"></div>
+  </div>
+
   <!-- Success Modal -->
   <div id="successModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
       <h2>Success!</h2>
       <p>Your attendance has been recorded successfully.</p>
+      <button onclick="closeModal()">Close</button>
     </div>
   </div>
 
   <!-- Attendance Closed Modal -->
   <div id="attendanceClosedModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
       <h2>Attendance Closed</h2>
-      <p>Attendance for this event is currently closed. Please check back later.</p>
+      <p>Attendance for this event has been closed. Please contact the organizers for more information.</p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Already Recorded Modal -->
+  <div id="alreadyRecordedModal" class="modal">
+    <div class="modal-content">
+      <h2>Attendance Already Recorded</h2>
+      <p>You have already recorded your attendance for this event.</p>
+      <button onclick="closeModal()">Close</button>
     </div>
   </div>
 
   <script>
-    document.getElementById('submitBtn').addEventListener('click', function () {
-      const email = document.getElementById('email').value;
-      const name = document.getElementById('name').value;
-      const program = document.getElementById('program').value;
-      const year = document.getElementById('year').value;
-
-      google.script.run.withSuccessHandler(function (response) {
-        if (response === 'closed') {
-          document.getElementById('attendanceClosedModal').style.display = 'flex';
-        } else if (response === 'exists') {
-          alert('You have already recorded your attendance.');
-        } else if (response === 'recorded') {
-          document.getElementById('successModal').style.display = 'flex';
-        }
-      }).checkDuplicateAndRecordAttendance(email, program, year, name);
+    // Dynamic Programs and Modal Management
+    window.addEventListener('load', function () {
+      loadPrograms(); // Load programs after page load
+      checkAttendanceStatus(); // Check attendance status after page load
     });
 
-    function closeModal() {
-      document.getElementById('successModal').style.display = 'none';
-      document.getElementById('attendanceClosedModal').style.display = 'none';
-    }
-
-    // Load programs and check attendance status when the page loads
-    window.onload = function () {
+    // Load Programs Dynamically
+    function loadPrograms() {
+      showLoading(); // Show loading spinner while fetching programs
       google.script.run.withSuccessHandler(function (programs) {
         const programSelect = document.getElementById('program');
+        programSelect.innerHTML = '<option value="">Select your program</option>';
         programs.forEach(function (program) {
           const option = document.createElement('option');
           option.value = program;
           option.textContent = program;
           programSelect.appendChild(option);
         });
+        hideLoading(); // Hide loading spinner when done
       }).getPrograms();
+    }
 
-      // Check attendance status on load
+    // Check Attendance Status
+    function checkAttendanceStatus() {
       google.script.run.withSuccessHandler(function (status) {
         if (status === 'No') {
           document.getElementById('attendanceClosedModal').style.display = 'flex';
         }
-      }).getAttendanceStatus();
-    };
+      }).isAttendanceOpen();
+    }
+
+    // Debounce form submission to prevent multiple submissions
+    let isSubmitting = false;
+    document.getElementById('submitBtn').addEventListener('click', function () {
+      if (isSubmitting) return;
+
+      isSubmitting = true;
+      const email = document.getElementById('email').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const program = document.getElementById('program').value.trim();
+      const year = document.getElementById('year').value.trim();
+
+      if (!email || !name || !program || !year) {
+        alert('Please fill out all fields.');
+        isSubmitting = false;
+        return;
+      }
+
+      showLoading(); // Show loading spinner during form submission
+      google.script.run.withSuccessHandler(function (response) {
+        isSubmitting = false;
+        hideLoading(); // Hide loading spinner after submission
+        if (response === 'closed') {
+          document.getElementById('attendanceClosedModal').style.display = 'flex';
+        } else if (response === 'exists') {
+          document.getElementById('alreadyRecordedModal').style.display = 'flex';
+        } else if (response === 'recorded') {
+          document.getElementById('successModal').style.display = 'flex';
+        }
+      }).checkDuplicateAndRecordAttendance(email, program, year, name);
+    });
+
+    // Show the loading indicator
+    function showLoading() {
+      document.querySelector('.loading').style.display = 'flex';
+    }
+
+    // Hide the loading indicator
+    function hideLoading() {
+      document.querySelector('.loading').style.display = 'none';
+    }
+
+    // Close modals when clicked
+    function closeModal() {
+      document.getElementById('successModal').style.display = 'none';
+      document.getElementById('attendanceClosedModal').style.display = 'none';
+      document.getElementById('alreadyRecordedModal').style.display = 'none';
+    }
   </script>
 </body>
 </html>
