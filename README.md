@@ -39,6 +39,7 @@ An event attendance management system designed to manage and track attendance fo
      - **Email Address**: The user's email address for event communication.
      - **Year Level**: The user's year level or academic standing.
      - **Program**: The user's academic program (e.g., Bachelor of Science in Nursing or others).
+     - **Section**: The user's class category
 
 ### 2. **Dynamic Program List**
    - The program list is dynamically populated from a Google Spreadsheet, ensuring that any changes to the list of available programs are automatically reflected in the form. Users select their program from this list to register.
@@ -66,6 +67,7 @@ An event attendance management system designed to manage and track attendance fo
      - User’s Email
      - Program
      - Year Level
+     - Section
 
 ### 7. **Program Sheet with Full Program Name and Abbreviation**
    - The **Program Sheet** contains two columns:
