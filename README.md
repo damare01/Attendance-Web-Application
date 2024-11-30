@@ -79,7 +79,7 @@ An event attendance management system designed to manage and track attendance fo
 ## Key Configurations ⚙️
 
 ### Attendance Open Setting
-- The `attendanceOpen` setting is controlled in the `settings` sheet of the Google Spreadsheet. This setting is crucial for managing when users can submit their attendance. The following values can be configured:
+- The `Attendance Open` setting is controlled in the `settings` sheet of the Google Spreadsheet. This setting is crucial for managing when users can submit their attendance. The following values can be configured:
   - **`Yes/yes`**: Users can submit their attendance.
   - **`No/no`**: Users will be informed that registration is closed.
 
