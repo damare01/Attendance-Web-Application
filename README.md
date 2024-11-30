@@ -7,7 +7,7 @@ An event attendance management system designed to manage and track attendance fo
 ## Table of Contents 📚
 
 1. [Features](#features-)
-    - [User Registration for Attendance](#user-registration-for-attendance)
+    - [User Registration for Attendance](#1-user-registration-for-attendance)
     - [Dynamic Program List](#dynamic-program-list)
     - [Form Submission and Data Recording](#form-submission-and-data-recording)
     - [Automated Email Confirmation](#automated-email-confirmation)
