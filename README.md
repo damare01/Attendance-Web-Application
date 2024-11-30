@@ -1,40 +1,37 @@
-# Attendance Web Application 📅
+# Attendance Web Application
 
 An event attendance management system designed to manage and track attendance for events hosted by an institution. The system allows users to register their attendance for events and records their program details along with their attendance status.
 
 ---
 
-## Table of Contents 📚
+## Table of Contents
 
-
-  * [Features 🌟](#features---)
-    + [1. **User Registration for Attendance**](#1---user-registration-for-attendance--)
-    + [2. **Dynamic Program List**](#2---dynamic-program-list--)
-    + [3. **Form Submission and Data Recording**](#3---form-submission-and-data-recording--)
-    + [4. **Automated Email Confirmation**](#4---automated-email-confirmation--)
-    + [5. **Conditional Form Responses Based on `Attendance Open` Setting**](#5---conditional-form-responses-based-on--attendance-open--setting--)
-    + [6. **Program-Specific Attendance Sheets**](#6---program-specific-attendance-sheets--)
-    + [7. **Program Sheet with Full Program Name and Abbreviation**](#7---program-sheet-with-full-program-name-and-abbreviation--)
-  * [Technologies Used 🛠️](#technologies-used----)
-  * [Key Configurations ⚙️](#key-configurations---)
-    + [Attendance Open Setting](#attendance-open-setting)
-    + [Example of Settings Sheet:](#example-of-settings-sheet-)
-    + [Example of Program Sheet:](#example-of-program-sheet-)
-  * [Setup Instructions ⚡](#setup-instructions--)
-    + [Step 1: Create a Google Sheet](#step-1--create-a-google-sheet)
-    + [Step 2: Open the Apps Script Editor](#step-2--open-the-apps-script-editor)
-    + [Step 3: Add the Code.gs Script](#step-3--add-the-codegs-script)
-    + [Step 4: Add the HTML File](#step-4--add-the-html-file)
-    + [Step 5: Deploy the Web App](#step-5--deploy-the-web-app)
-    + [Step 6: Authorize the Script](#step-6--authorize-the-script)
-    + [Step 7: Access the Web App](#step-7--access-the-web-app)
-  * [Tips for a Smooth Setup 🧑‍💻](#tips-for-a-smooth-setup------)
-  * [Future Enhancements 🚀](#future-enhancements---)
-
+1. [Features](#features)
+    - [User Registration for Attendance](#user-registration-for-attendance)
+    - [Dynamic Program List](#dynamic-program-list)
+    - [Form Submission and Data Recording](#form-submission-and-data-recording)
+    - [Automated Email Confirmation](#automated-email-confirmation)
+    - [Conditional Form Responses Based on `Attendance Open` Setting](#conditional-form-responses-based-on-attendance-open-setting)
+    - [Program-Specific Attendance Sheets](#program-specific-attendance-sheets)
+    - [Program Sheet with Full Program Name and Abbreviation](#program-sheet-with-full-program-name-and-abbreviation)
+2. [Technologies Used](#technologies-used)
+3. [Key Configurations](#key-configurations)
+    - [Attendance Open Setting](#attendance-open-setting)
+    - [Example of Settings Sheet](#example-of-settings-sheet)
+    - [Example of Program Sheet](#example-of-program-sheet)
+4. [Setup Instructions](#setup-instructions)
+    - [Step 1: Create a Google Sheet](#step-1-create-a-google-sheet)
+    - [Step 2: Open the Apps Script Editor](#step-2-open-the-apps-script-editor)
+    - [Step 3: Add the Code.gs Script](#step-3-add-the-codegs-script)
+    - [Step 4: Add the HTML File](#step-4-add-the-html-file)
+    - [Step 5: Deploy the Web App](#step-5-deploy-the-web-app)
+    - [Step 6: Authorize the Script](#step-6-authorize-the-script)
+    - [Step 7: Access the Web App](#step-7-access-the-web-app)
+5. [Future Enhancements](#future-enhancements)
 
 ---
 
-## Features 🌟
+## Features
 
 ### 1. **User Registration for Attendance**
    - Users can register their attendance for events by filling out a form with the following details:
@@ -79,7 +76,7 @@ An event attendance management system designed to manage and track attendance fo
 
 ---
 
-## Technologies Used 🛠️
+## Technologies Used
 - **Google Apps Script**: Handles backend logic, form processing, and communication with Google Sheets for data storage and retrieval.
 - **Google Sheets**: Stores event-related data, including user attendance and program details.
 - **MailApp (Google Apps Script)**: Sends automated email confirmations to users after successful form submissions.
@@ -87,10 +84,10 @@ An event attendance management system designed to manage and track attendance fo
 
 ---
 
-## Key Configurations ⚙️
+## Key Configurations
 
 ### Attendance Open Setting
-- The `Attendance Open` setting is controlled in the `settings` sheet of the Google Spreadsheet. This setting is crucial for managing when users can submit their attendance. The following values can be configured:
+- The `attendanceOpen` setting is controlled in the `settings` sheet of the Google Spreadsheet. This setting is crucial for managing when users can submit their attendance. The following values can be configured:
   - **`Yes/yes`**: Users can submit their attendance.
   - **`No/no`**: Users will be informed that registration is closed.
 
@@ -115,7 +112,7 @@ An event attendance management system designed to manage and track attendance fo
 
 ---
 
-## Setup Instructions ⚡
+## Setup Instructions
 
 ### Step 1: Create a Google Sheet
 - Open Google Sheets and create a new spreadsheet.
@@ -151,14 +148,14 @@ An event attendance management system designed to manage and track attendance fo
 
 ---
 
-## Tips for a Smooth Setup 🧑‍💻
+## Tips for a Smooth Setup
 - Ensure your script and HTML are error-free before deployment.
 - Test the web app link on different devices to ensure compatibility.
 - Use **Manage deployments** for future updates.
 
 ---
 
-## Future Enhancements 🚀
+## Future Enhancements
 Future development will include additional features like:
 - File upload for attendance proof.
 - Better handling of event-specific data.
@@ -166,6 +163,6 @@ Future development will include additional features like:
 
 ---
 
-### License 📄
+### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
