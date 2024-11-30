@@ -86,7 +86,7 @@ function getPrograms() {
 }
 
 // Check for duplicate email and record attendance
-function checkDuplicateAndRecordAttendance(email, program, year, name) {
+function checkDuplicateAndRecordAttendance(email, program, year, name, section) {
   if (!isAttendanceOpen()) {
     return 'closed'; // Attendance is closed
   }
@@ -99,7 +99,7 @@ function checkDuplicateAndRecordAttendance(email, program, year, name) {
 
   if (!sheet) {
     sheet = spreadsheet.insertSheet(sheetName);
-    sheet.appendRow(['Timestamp', 'Email', 'Name', 'Program', 'Year']);
+    sheet.appendRow(['Timestamp', 'Email', 'Name', 'Program', 'Year', 'Section']);
   }
 
   var data = sheet.getDataRange().getValues();
@@ -113,10 +113,10 @@ function checkDuplicateAndRecordAttendance(email, program, year, name) {
   }
 
   // If email not found, record attendance
-  sheet.appendRow([new Date(), email, name, program, year]);
+  sheet.appendRow([new Date(), email, name, program, year, section]);
 
   // Send confirmation email
-  sendConfirmationEmail(email, name, program, year);
+  sendConfirmationEmail(email, name, program, year, section);
 
   return 'recorded';
 }
@@ -141,7 +141,7 @@ function getProgramAbbreviations() {
 }
 
 // Send a confirmation email to the user
-function sendConfirmationEmail(email, name, program, year) {
+function sendConfirmationEmail(email, name, program, year, section) {
   var eventName = getEventName(); // Fetch the event name from the Settings sheet
   var subject = `Attendance Acknowledgement - ${eventName}`;
   var body = `
@@ -195,6 +195,7 @@ function sendConfirmationEmail(email, name, program, year) {
           <p>Your participation is greatly appreciated, and we hope that the knowledge gained will be valuable in your academic and professional journey.</p>
           <p><strong>Program:</strong> ${program}</p>
           <p><strong>Year:</strong> ${year}</p>
+           <p><strong>Year:</strong> ${section}</p>
           <p>We look forward to your participation in future events.</p>
           <p>Best regards,<br>San Pedro College - College Red Cross Youth</p>
         </div>
